@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New project</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+      background-color: #f0f8ff;
+    }
+
+    .hidden {
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+    }
+
+    .visible {
+      opacity: 1;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #ff69b4;
+    }
+
+    h2 {
+      font-size: 1.5em;
+      margin-top: 20px;
+      color: #ff69b4;
+    }
+
+    .reasons {
+      margin-top: 30px;
+      font-size: 1.2em;
+    }
+
+    .reason {
+      margin: 10px 0;
+    }
+
+    .pleading-messages {
+      margin-top: 20px;
+      font-size: 1.5em;
+      color: #ff4500;
+      display: none;
+      font-weight: bold;
+    }
+
+    .buttons-container {
+      margin-top: 40px;
+    }
+
+    .button {
+      padding: 15px 30px;
+      font-size: 1.2em;
+      margin: 20px;
+      cursor: pointer;
+      border: none;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .yes-button {
+      background-color: #32cd32;
+      color: white;
+    }
+
+    .no-button {
+      background-color: #ff6347;
+      color: white;
+    }
+
+    .congratulations {
+      margin-top: 30px;
+      font-size: 2em;
+      color: #32cd32;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="title" class="hidden">Pookie🎀</h1>
+  <h2 id="valentineText" class="hidden">Will you be my Valentine?</h2>
+
+  <div class="reasons">
+    <div class="reason hidden" id="reason1">1. I will be by your side always.</div>
+    <div class="reason hidden" id="reason2">2. I will let you use my phone.</div>
+  </div>
+
+  <div class="buttons-container hidden" id="buttonsContainer">
+    <button class="button yes-button" id="yesButton" onclick="handleAnswer(true)">Yes</button>
+    <button class="button no-button" id="noButton" onclick="handleAnswer(false)">No</button>
+  </div>
+
+  <div class="pleading-messages" id="pleadingMessages"></div>
+
+  <div class="congratulations" id="congratulationsMessage">Congratulations! You are my Valentine! ily</div>
+
+  <script>
+    let yesButton = document.getElementById('yesButton');
+    let noButton = document.getElementById('noButton');
+    let congratulationsMessage = document.getElementById('congratulationsMessage');
+    let pleadingMessagesDiv = document.getElementById('pleadingMessages');
+
+    let pleadingMessages = [
+      "Please say yes 🥺",
+      "I beg of you 😭",
+      "Don't see me as just a friend 💔",
+      "You're breaking my heart 😢",
+      "I'll be the best Valentine ever! 💕",
+      "Come on, just say yes! 🙏",
+      "I'll get you chocolates 🍫",
+      "Do it for me? 🥹"
+    ];
+
+    let noClickCount = 0;
+
+    function handleAnswer(isYes) {
+      if (isYes) {
+        congratulationsMessage.style.display = 'block';
+        yesButton.disabled = true;
+        noButton.disabled = true;
+      } else {
+        yesButton.style.fontSize = `${parseInt(window.getComputedStyle(yesButton).fontSize) + 5}px`;
+        noButton.style.fontSize = `${parseInt(window.getComputedStyle(noButton).fontSize) - 5}px`;
+
+        pleadingMessagesDiv.innerText = pleadingMessages[noClickCount % pleadingMessages.length];
+        pleadingMessagesDiv.style.display = "block";
+
+        setTimeout(() => {
+          pleadingMessagesDiv.style.display = "none";
+        }, 2000);
+
+        noClickCount++;
+      }
+    }
+
+    // Reveal elements one by one with longer delays
+    function revealElement(element, delay) {
+      setTimeout(() => {
+        element.classList.add("visible");
+      }, delay);
+    }
+
+    window.onload = function() {
+      revealElement(document.getElementById('title'), 2000);
+      revealElement(document.getElementById('valentineText'), 4000);
+      revealElement(document.getElementById('reason1'), 7000);
+      revealElement(document.getElementById('reason2'), 10000);
+      revealElement(document.getElementById('buttonsContainer'), 13000);
+    };
+  </script>
+
+</body>
+</html>
